@@ -1,17 +1,17 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import database.PostgresSQLDatabaseInitializer;
 import domain.Marketplace;
-import domain.Product;
 import service.ProductService;
-import storage.MemoryProductStorage;
+import storage.PostgresSQLProductStorage;
 import storage.ProductStorage;
-
-import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        ProductStorage productStorage = new MemoryProductStorage();
-
+        new PostgresSQLDatabaseInitializer().init();
+        ProductStorage productStorage = new PostgresSQLProductStorage();
         ProductService productService = new ProductService(productStorage);
 
         productService.addProduct(
@@ -22,18 +22,23 @@ public class Main {
                 70000
         );
 
-        productService.addProduct(
-                1001,
-                "AirPods",
-                "https://market.yandex.ru/product/airpods",
-                Marketplace.YANDEX_MARKET,
-                12000
-        );
 
-        List<Product> products = productService.getUserProducts(1001);
+        String url = "jdbc:postgresql://localhost:5432/price_tracker";
+        String user = "user";
+        String password = "";
 
-        for (Product product : products) {
-            System.out.println(product);
+
+
+        try (Connection connection =
+                     DriverManager.getConnection(url, user, password)) {
+
+            System.out.println("Connected to PostgreSQL");
+
+        } catch (SQLException e) {
+
+            System.out.println("Connection failed");
+            e.printStackTrace();
+
         }
     }
 }

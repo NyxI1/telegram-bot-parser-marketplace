@@ -27,6 +27,7 @@ public class PostgresSQLDatabaseInitializer {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement statement = connection.createStatement()) {
 
+            statement.execute("DROP TABLE IF EXISTS products");
             statement.execute(sql);
             System.out.println("PostgreSQL database initialized");
 
