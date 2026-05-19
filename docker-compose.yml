@@ -17,5 +17,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  app:
+    build: .
+
+    container_name: telegram_bot_app
+
+    depends_on:
+      - postgres
+
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/price_tracker
+      DB_USER: user
+      DB_PASSWORD: 1234
+
 volumes:
   postgres_data:

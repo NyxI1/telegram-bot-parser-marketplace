@@ -22,23 +22,5 @@ public class Main {
                 70000
         );
 
-
-        String url = "jdbc:postgresql://localhost:5432/price_tracker";
-        String user = "user";
-        String password = "";
-
-
-
-        try (Connection connection =
-                     DriverManager.getConnection(url, user, password)) {
-
-            System.out.println("Connected to PostgreSQL");
-
-        } catch (SQLException e) {
-
-            System.out.println("Connection failed");
-            e.printStackTrace();
-
-        }
     }
 }
