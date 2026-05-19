@@ -7,9 +7,16 @@ import java.sql.Statement;
 
 public class PostgresSQLDatabaseInitializer {
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/price_tracker";
-    private static final String USER = "user";
-    private static final String PASSWORD = "";
+    private static final String DB_URL =
+            System.getenv().getOrDefault(
+                    "DB_URL",
+                    "jdbc:postgresql://localhost:5432/price_tracker"
+            );
+
+    private static final String USER =
+            System.getenv().getOrDefault("DB_USER", "user");
+    private static final String PASSWORD =
+            System.getenv().getOrDefault("DB_PASSWORD", "1234");
 
     public void init() {
         String sql = """
