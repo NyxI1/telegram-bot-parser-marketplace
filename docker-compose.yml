@@ -6,7 +6,7 @@ services:
     container_name: price_tracker_db
 
     environment:
-      POSTGRES_DB: price_tracker
+      POSTGRES_DB: nikita_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: 1234
 
@@ -31,7 +31,7 @@ services:
         condition: service_healthy
 
     environment:
-      DB_URL: jdbc:postgresql://postgres:5432/price_tracker
+      DB_URL: jdbc:postgresql://postgres:5432/nikita_db
       DB_USER: user
       DB_PASSWORD: 1234
 
